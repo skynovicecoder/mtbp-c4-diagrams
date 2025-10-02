@@ -37,7 +37,7 @@ jobs:
             mkdir -p output/$name
             ./structurizr-cli/structurizr.sh export \
               -workspace "$dsl" \
-              -format plantuml-png \
+              -format svg \
               -output output/$name
           done
 

@@ -1,6 +1,9 @@
 name: Generate Structurizr Diagrams
 
 on:
+  push:
+    branches:
+      - 'feature/**'
   pull_request:
     branches:
       - main
@@ -35,17 +38,20 @@ jobs:
               -workspace "$dsl" \
               -format plantuml-png \
               -output output/$name
-          done
 
-      - name: Upload diagrams
-        uses: actions/upload-artifact@v3
+      - name: Upload diagrams artifact
+        uses: actions/upload-artifact@v4
         with:
           name: structurizr-diagrams
           path: output/
 
-      - name: Comment diagrams link on PR
-        uses: marocchino/sticky-pull-request-comment@v2
+      - name: Comment diagrams on PR
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v4
         with:
-          message: |
-            Structurizr diagrams generated for this PR.
-            Download the artifacts here: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ## Structurizr Diagrams
+            Diagrams for this PR are available as artifacts:  
+            [Download diagrams](https://github.com/${{ github.repository }}/suites/${{ github.run_id }}/artifacts)

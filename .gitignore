@@ -1,0 +1,14 @@
+# VS Code
+.vscode/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Structurizr CLI
+structurizr-cli/
+structurizr-cli.zip

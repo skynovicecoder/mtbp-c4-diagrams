@@ -27,17 +27,19 @@ jobs:
         run: |
           curl -L https://github.com/structurizr/cli/releases/download/v2025.05.28/structurizr-cli.zip -o structurizr-cli.zip
           unzip structurizr-cli.zip -d structurizr-cli
-          chmod +x structurizr-cli/structurizr-cli
+          chmod +x structurizr-cli/structurizr.sh
 
-      # Step 4: Generate diagrams for all DSL files
+      # Step 4: Generate diagrams for each DSL file in its own folder
       - name: Generate diagrams
         run: |
           mkdir -p output
           for dsl in structurizr/*.dsl; do
-            ./structurizr-cli/structurizr-cli export \
+            name=$(basename "$dsl" .dsl)
+            mkdir -p output/$name
+            ./structurizr-cli/structurizr.sh export \
               -workspace "$dsl" \
               -format png \
-              -output output
+              -output output/$name
           done
 
       # Step 5: Commit and push generated diagrams back to repo

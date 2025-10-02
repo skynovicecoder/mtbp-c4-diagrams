@@ -1,0 +1,88 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36" version="28.2.5">
+  <diagram name="Page-1" id="TZpOHT106iHVFViuGuf7">
+    <mxGraphModel dx="1113" dy="718" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" background="light-dark(#CCE5FF,#121212)" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-60" value="" style="rounded=1;whiteSpace=wrap;html=1;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="-111.25" y="156.25" width="557.5" height="295" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-4" value="Code Checkout" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="40" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-5" value="+codeCheckout()" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="z5waqFHpB5vsYEFtPzMl-4">
+          <mxGeometry y="30" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-7" value="Build Docker Image" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="95.63" y="180" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-8" value="+ buildDockerImage&lt;div&gt;&lt;br/&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="z5waqFHpB5vsYEFtPzMl-7">
+          <mxGeometry y="30" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-10" value="Push Docker Image to DockerHub / Nexus Repository" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=50;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;miterlimit=4;" vertex="1" parent="1">
+          <mxGeometry x="90" y="310" width="173.75" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-11" value="+dockerPush with tags" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="z5waqFHpB5vsYEFtPzMl-10">
+          <mxGeometry y="50" width="173.75" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-13" value="Update Image Manifest" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="92.5" y="480" width="176.25" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-14" value="&lt;div&gt;+ updateImageManifest&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="z5waqFHpB5vsYEFtPzMl-13">
+          <mxGeometry y="30" width="176.25" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-15" value="FluxCD" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;miterlimit=4;" vertex="1" parent="1">
+          <mxGeometry x="620" y="190" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-16" value="+ deployUsingK8APiServer&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ viaHelm&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="z5waqFHpB5vsYEFtPzMl-15">
+          <mxGeometry y="30" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-35" value="&lt;font style=&quot;font-size: 17px;&quot;&gt;Continuous Deployment (CD) WorkFlows&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="470" y="440" width="230" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-41" value="Manifest Repo" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;miterlimit=4;" vertex="1" parent="1">
+          <mxGeometry x="330" y="190" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-42" value="+ k8YamlManifestFiles&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ kustomizationYaml&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;div&gt;+ helmReaseCRDs&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="z5waqFHpB5vsYEFtPzMl-41">
+          <mxGeometry y="30" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-44" value="K8 Clusters / Environments" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;whiteSpace=wrap;html=1;miterlimit=4;" vertex="1" parent="1">
+          <mxGeometry x="840" y="190" width="160" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-45" value="&lt;div&gt;+ namespace (env / prod/dev/uat)&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;+ runningPods&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;whiteSpace=wrap;html=1;" vertex="1" parent="z5waqFHpB5vsYEFtPzMl-44">
+          <mxGeometry y="30" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-48" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.526;entryY=0.111;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="z5waqFHpB5vsYEFtPzMl-4" target="z5waqFHpB5vsYEFtPzMl-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-50" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.479;entryY=0.125;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="z5waqFHpB5vsYEFtPzMl-10" target="z5waqFHpB5vsYEFtPzMl-13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-51" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.522;entryY=0.091;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="z5waqFHpB5vsYEFtPzMl-7" target="z5waqFHpB5vsYEFtPzMl-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-53" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.511;entryY=1.007;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="z5waqFHpB5vsYEFtPzMl-13" target="z5waqFHpB5vsYEFtPzMl-42">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-55" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.003;entryY=0.37;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="z5waqFHpB5vsYEFtPzMl-15" target="z5waqFHpB5vsYEFtPzMl-45">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-57" value="" style="endArrow=classic;html=1;rounded=0;entryX=0.996;entryY=0.35;entryDx=0;entryDy=0;entryPerimeter=0;exitX=-0.015;exitY=0.36;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="z5waqFHpB5vsYEFtPzMl-16" target="z5waqFHpB5vsYEFtPzMl-42">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="480" y="364.40999999999997" as="sourcePoint" />
+            <mxPoint x="580" y="364.40999999999997" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-58" value="Change Event" style="edgeLabel;resizable=0;html=1;;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="z5waqFHpB5vsYEFtPzMl-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-63" value="&lt;font style=&quot;font-size: 14px;&quot;&gt;GitHub WorkFlows&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="395" y="45" width="60" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="z5waqFHpB5vsYEFtPzMl-64" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.891;entryY=0.985;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="z5waqFHpB5vsYEFtPzMl-63" target="z5waqFHpB5vsYEFtPzMl-60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

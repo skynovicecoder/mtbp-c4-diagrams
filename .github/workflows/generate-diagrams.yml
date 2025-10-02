@@ -14,21 +14,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      # Step 2: Set up Java
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
           distribution: 'temurin'
           java-version: '17'
 
+      # Step 3: Download Structurizr CLI
       - name: Download Structurizr CLI
         run: |
           curl -L https://github.com/structurizr/cli/releases/download/v2025.05.28/structurizr-cli.zip -o structurizr-cli.zip
           unzip structurizr-cli.zip -d structurizr-cli
           chmod +x structurizr-cli/structurizr.sh
 
+      # Step 4: Generate diagrams (done)
       - name: Generate diagrams
         run: |
           mkdir -p output
@@ -37,15 +41,25 @@ jobs:
             mkdir -p output/$name
             ./structurizr-cli/structurizr.sh export \
               -workspace "$dsl" \
-              -format svg \
+              -format plantuml/c4plantuml \
               -output output/$name
           done
 
-      - name: Commit and push diagrams
-        if: github.event_name != 'pull_request'
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add output/*
-          git commit -m "Auto-generated Structurizr diagrams [skip ci]" || echo "No changes to commit"
-          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref_name }}
+      # Step 5: Upload diagrams as PR artifacts
+      - name: Upload diagrams artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: structurizr-diagrams
+          path: output/
+
+      # Step 6: Comment on PR with diagrams link
+      - name: Comment diagrams on PR
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ## Structurizr Diagrams
+            Diagrams for this PR are available as workflow artifacts:  
+            [Download diagrams](https://github.com/${{ github.repository }}/suites/${{ github.run_id }}/artifacts)

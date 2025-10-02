@@ -4,6 +4,8 @@ on:
   push:
     branches:
       - 'feature/**'
+      - main
+
   pull_request:
     branches:
       - main
@@ -38,12 +40,12 @@ jobs:
               -workspace "$dsl" \
               -format plantuml-png \
               -output output/$name
-          done
 
       - name: Commit and push diagrams
+        if: github.event_name != 'pull_request'
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add output/*
           git commit -m "Auto-generated Structurizr diagrams [skip ci]" || echo "No changes to commit"
-          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref_name }}
+          git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref_name }}

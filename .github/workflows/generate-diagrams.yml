@@ -38,20 +38,12 @@ jobs:
               -workspace "$dsl" \
               -format plantuml-png \
               -output output/$name
+          done
 
-      - name: Upload diagrams artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: structurizr-diagrams
-          path: output/
-
-      - name: Comment diagrams on PR
-        if: github.event_name == 'pull_request'
-        uses: peter-evans/create-or-update-comment@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          issue-number: ${{ github.event.pull_request.number }}
-          body: |
-            ## Structurizr Diagrams
-            Diagrams for this PR are available as artifacts:  
-            [Download diagrams](https://github.com/${{ github.repository }}/suites/${{ github.run_id }}/artifacts)
+      - name: Commit and push diagrams
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/*
+          git commit -m "Auto-generated Structurizr diagrams [skip ci]" || echo "No changes to commit"
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }} HEAD:${{ github.ref_name }}

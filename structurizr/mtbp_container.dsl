@@ -9,6 +9,7 @@ workspace "MTBP" {
         # External systems
         okta = softwareSystem   "OKTA / OAuth2" "Identity provider for authentication and authorization"
         kafka = softwareSystem "Kafka Messaging Broker" "Event streaming backbone"
+        grafana = softwareSystem "Grafana Dashboard" "Visualizes metrics, logs and traces for observability"
 
         # Main system
         mtbp = softwareSystem "Movie Ticket Booking Platform" "Platform for movie ticket booking" {
@@ -27,6 +28,10 @@ workspace "MTBP" {
             inventoryDb = container "Inventory DB" "Stores inventory info" "PostgreSQL"
             bookingDb = container "Booking DB" "Stores booking info" "PostgreSQL"
             paymentDb = container "Payment DB" "Stores payment info" "PostgreSQL"
+
+            # Observability Containers
+            prometheus = container "Prometheus" "Collects metrics and provides alerting" "TimeSeriesDB"
+            loki = container "Loki" "Collects and indexes logs (via Promtail)" "Loki Logs Collector & Promatail"
 
             # Relationships inside MTBP
             lb -> apigw "Routes requests"
@@ -48,6 +53,22 @@ workspace "MTBP" {
             paymentSvc -> kafka "Publishes Payment Events"
             kafka -> bookingSvc "Consumes Booking Events"
             kafka -> paymentSvc "Consumes Payment Events"
+
+            # Observability relationships
+            bookingSvc -> prometheus "Exposes metrics"
+            paymentSvc -> prometheus "Exposes metrics"
+            inventorySvc -> prometheus "Exposes metrics"
+            customerSvc -> prometheus "Exposes metrics"
+            theatreSvc -> prometheus "Exposes metrics"
+
+            bookingSvc -> loki "Pushes logs via Promtail"
+            paymentSvc -> loki "Pushes logs via Promtail"
+            inventorySvc -> loki "Pushes logs via Promtail"
+            customerSvc -> loki "Pushes logs via Promtail"
+            theatreSvc -> loki "Pushes logs via Promtail"
+
+            prometheus -> grafana "Provides metrics"
+            loki -> grafana "Provides logs"
         }
 
         # External relationships

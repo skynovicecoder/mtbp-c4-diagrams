@@ -10,6 +10,8 @@ workspace "Movie Ticket Booking Platform (MTBP)" {
 
         kafkaMQ = softwareSystem "Kafka Messaging Broker" "Event streaming backbone"
 
+        grafana = softwareSystem "Grafana Dashboard" "Visualizes metrics, logs and traces for observability"
+
         mtbp = softwareSystem "Movie Ticket Booking Platform (MTBP)" "Online platform to book movie tickets" {
 
         # Containers
@@ -29,6 +31,10 @@ workspace "Movie Ticket Booking Platform (MTBP)" {
         inventoryDb = container "Inventory DB" "PostgreSQL"
         bookingDb = container "Booking DB" "PostgreSQL"
         paymentDb = container "Payment DB" "PostgreSQL"
+
+        # Observability Containers
+        prometheus = container "Prometheus" "Collects metrics and provides alerting"
+        loki = container "Loki" "Collects and indexes logs (via Promtail)"
 
         # --- Relationships ---
         # User journeys
@@ -70,6 +76,22 @@ workspace "Movie Ticket Booking Platform (MTBP)" {
         kafkaMQ -> bookingSvc "Consumes Booking Events"
         paymentSvc -> kafkaMQ "Publishes Payment Success/Failure Events"
         kafkaMQ -> paymentSvc "Consumes Payment Success/Failure Events"
+
+        # Observability relationships
+        bookingSvc -> prometheus "Exposes metrics"
+        paymentSvc -> prometheus "Exposes metrics"
+        inventorySvc -> prometheus "Exposes metrics"
+        customerSvc -> prometheus "Exposes metrics"
+        theatreSvc -> prometheus "Exposes metrics"
+
+        bookingSvc -> loki "Pushes logs via Promtail"
+        paymentSvc -> loki "Pushes logs via Promtail"
+        inventorySvc -> loki "Pushes logs via Promtail"
+        customerSvc -> loki "Pushes logs via Promtail"
+        theatreSvc -> loki "Pushes logs via Promtail"
+
+        prometheus -> grafana "Provides metrics"
+        loki -> grafana "Provides logs"
         }
     }
 

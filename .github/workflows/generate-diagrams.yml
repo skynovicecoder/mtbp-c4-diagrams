@@ -3,7 +3,7 @@ name: Generate Structurizr Diagrams
 on:
   push:
     branches:
-      - main
+      - 'feature/**'
   pull_request:
     branches:
       - main
@@ -40,7 +40,7 @@ jobs:
             mkdir -p output/$name
             ./structurizr-cli/structurizr.sh export \
               -workspace "$dsl" \
-              -format png \
+              -format plantuml-png \
               -output output/$name
           done
 
@@ -51,4 +51,4 @@ jobs:
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add output/*
           git commit -m "Auto-generated Structurizr diagrams [skip ci]" || echo "No changes to commit"
-          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/skynovicecoder/mtbp-c4-diagrams.git HEAD:main
+          git push --force https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/skynovicecoder/mtbp-c4-diagrams.git HEAD:${{ github.ref_name }}
